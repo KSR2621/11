@@ -19,7 +19,6 @@
             --gradient-2: linear-gradient(45deg, var(--matrix-green), var(--neon-blue));
         }
 
-        /* Scroll-based fade-in animation */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -31,7 +30,6 @@
             transform: translateY(0);
         }
 
-        /* Delay classes for staggered animations */
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
@@ -124,18 +122,17 @@
         }
 
         nav {
-            position: sticky;
+            position: fixed;
             top: 0;
-            backdrop-filter: blur(10px);
+            width: 100%;
             background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0, 243, 255, 0.1);
             z-index: 1000;
-            padding: 0.8rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 60px;
-            width: 100%;
         }
 
         .logo {
@@ -145,7 +142,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem; /* Reduced from 2rem to 1rem for desktop */
         }
 
         .nav-links a {
@@ -181,17 +178,19 @@
 
         .hamburger {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: none;
             border: none;
             color: var(--neon-blue);
             cursor: pointer;
-            transition: color 0.3s ease;
-            z-index: 1001;
+            transition: all 0.3s ease;
+            z-index: 1002;
+            padding: 0.5rem;
         }
 
         .hamburger:hover {
             color: var(--matrix-green);
+            transform: rotate(90deg);
         }
 
         .auth-buttons button {
@@ -424,7 +423,7 @@
             background: rgba(10, 10, 15, 0.3);
             border-radius: 12px;
             z-index: 2;
-            mix-blend-mode: overlay;
+            Mix-blend-mode: overlay;
             pointer-events: none;
         }
 
@@ -502,23 +501,14 @@
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(5px);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
@@ -530,7 +520,6 @@
             visibility: visible;
         }
 
-        /* Mobile-specific styles */
         @media (max-width: 768px) {
             body {
                 overflow-x: hidden;
@@ -538,6 +527,7 @@
 
             header {
                 padding: 100px 15px;
+                margin-top: 50px;
             }
 
             header h1.glow {
@@ -555,8 +545,7 @@
             }
 
             nav {
-                padding: 0.5rem 1rem;
-                height: 50px;
+                padding: 1rem;
             }
 
             .logo {
@@ -565,7 +554,6 @@
 
             .hamburger {
                 display: block;
-                font-size: 1.3rem;
             }
 
             .nav-links {
@@ -575,13 +563,13 @@
                 width: 80%;
                 max-width: 300px;
                 height: 100vh;
-                background: var(--card-bg);
+                background: linear-gradient(135deg, rgba(15, 15, 25, 0.95), rgba(25, 25, 35, 0.95));
                 flex-direction: column;
-                padding: 70px 20px 20px;
-                gap: 20px;
-                transition: right 0.3s ease;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-                z-index: 1000;
+                padding: 4rem 1rem;
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1001;
+                box-shadow: -5px 0 15px rgba(0, 243, 255, 0.1);
+                border-left: 1px solid var(--neon-blue);
             }
 
             .nav-links.active {
@@ -589,10 +577,16 @@
             }
 
             .nav-links a {
-                font-size: 1.1rem;
-                padding: 0.5rem 0;
-                border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+                font-size: 1.3rem;
+                padding: 0.8rem 1rem; /* Reduced from 1.2rem to 0.8rem */
                 width: 100%;
+                border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                background: rgba(0, 243, 255, 0.05);
+                padding-left: 1.5rem;
             }
 
             .desktop-auth {
@@ -602,14 +596,15 @@
             .mobile-auth {
                 display: flex;
                 flex-direction: column;
-                width: 100%;
-                margin-top: 20px;
-                gap: 15px;
+                gap: 1rem; /* Reduced from 1.5rem to 1rem */
+                margin-top: 1.5rem; /* Reduced from 2rem to 1.5rem */
+                padding: 0 1rem;
             }
 
             .mobile-auth button {
                 width: 100%;
-                padding: 0.7rem;
+                padding: 0.8rem;
+                font-size: 1rem;
             }
 
             .container {
@@ -699,7 +694,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <nav>
         <div class="logo gradient-text">Taskora</div>
         <button class="hamburger" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
         <div class="nav-links" id="navLinks">
@@ -807,7 +802,7 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
         import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-
+    
         const firebaseConfig = {
             apiKey: "AIzaSyD0wtET8bTtw_133RE4rWZiRFGESfbDtC0",
             authDomain: "student-startup-connect.firebaseapp.com",
@@ -818,12 +813,11 @@
             appId: "1:570854385529:web:e45e5076a0cbcb9a56f1a8",
             measurementId: "G-T5PMGL8K26"
         };
-
+    
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-
+    
         document.addEventListener('DOMContentLoaded', () => {
-            // Scroll animation logic
             const fadeElements = document.querySelectorAll('.fade-in');
             
             const fadeInOnScroll = () => {
@@ -840,34 +834,44 @@
             window.addEventListener('load', fadeInOnScroll);
             fadeInOnScroll();
 
-            // Mobile menu toggle
+            // Updated mobile menu functionality
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('#navLinks');
-            const mobileOverlay = document.querySelector('#mobileOverlay');
+            const overlay = document.querySelector('#mobileOverlay');
+            const body = document.body;
 
-            const toggleMenu = () => {
-                navLinks.classList.toggle('active');
-                mobileOverlay.classList.toggle('active');
-                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
-                hamburger.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            };
+            function toggleMenu() {
+                const isOpen = navLinks.classList.toggle('active');
+                overlay.classList.toggle('active', isOpen);
+                hamburger.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                body.style.overflow = isOpen ? 'hidden' : '';
+            }
 
-            hamburger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleMenu();
-            });
+            function closeMenu() {
+                navLinks.classList.remove('active');
+                overlay.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                body.style.overflow = '';
+            }
 
-            mobileOverlay.addEventListener('click', toggleMenu);
+            hamburger.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', closeMenu);
 
             navLinks.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     if (window.innerWidth <= 768) {
-                        toggleMenu();
+                        closeMenu();
                     }
                 });
             });
 
-            // Auth state handling
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+
+            // Firebase Auth Handling
             onAuthStateChanged(auth, (user) => {
                 const desktopAuth = document.getElementById('desktopAuth');
                 const mobileAuth = document.getElementById('mobileAuth');
@@ -875,12 +879,13 @@
 
                 if (user) {
                     const userType = localStorage.getItem('userType');
-                    desktopAuth.innerHTML = `<button class="profile-btn">Profile</button>`;
-                    mobileAuth.innerHTML = `<button class="profile-btn">Profile</button>`;
+                    const profileHTML = `<button class="profile-btn">Profile</button>`;
+                    desktopAuth.innerHTML = profileHTML;
+                    mobileAuth.innerHTML = profileHTML;
                     
                     if (userType === 'startup') {
                         dynamicNav.innerHTML = `<a href="project-form.html">List a Project</a>`;
-                    } else if (userType === 'student') {
+                    } else {
                         dynamicNav.innerHTML = '';
                     }
                     
