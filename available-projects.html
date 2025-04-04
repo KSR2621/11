@@ -212,8 +212,7 @@
             background: var(--gradient-1);
             color: var(--dark-bg);
             padding: 0.5rem 1.5rem;
-            border: 2px solid
-            var(--neon-blue);
+            border: 2px solid var(--neon-blue);
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
@@ -437,40 +436,40 @@
         }
 
         .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
             padding: 60px 20px;
             max-width: 1300px;
             margin: 0 auto;
-            background: rgba(10, 10, 15, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
-            position: static; /* Ensure container stays in normal flow */
+            background: rgba(10, 10, 15, 0.5); /* Subtle background from your theme */
+            border-radius: 20px; /* Rounded corners from reference */
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2); /* Shadow inspired by reference */
+            overflow: hidden; /* Static, no scrolling */
         }
 
         .container p {
             font-size: 1.2rem;
             color: var(--text-secondary);
-            grid-column: 1 / -1; /* Span all columns */
+            width: 100%;
             text-align: center;
             padding: 20px;
         }
 
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(0, 243, 255, 0.2);
             border-radius: 12px;
             padding: 25px;
             transition: all 0.4s ease;
-            min-width: 0;
-            height: 400px;
-            overflow-y: auto;
-            overflow-x: hidden;
+            width: 300px;
+            height: 400px; /* Adjusted height for consistency */
+            flex: 0 0 300px; /* Fixed width like reference */
             display: flex;
             flex-direction: column;
             position: relative;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--neon-blue); /* Border from reference */
         }
 
         .card::before {
@@ -495,8 +494,25 @@
 
         .card:hover {
             transform: translateY(-10px);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 243, 255, 0.3); /* Enhanced shadow from reference */
+            border-left-color: var(--matrix-green);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-1); /* Gradient top bar from reference */
+            border-radius: 12px 12px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover::after {
+            opacity: 1;
         }
 
         .card-content {
@@ -796,13 +812,14 @@
             }
             
             .container {
-                grid-template-columns: 1fr; /* Single column on mobile */
                 padding: 40px 15px;
                 gap: 25px;
             }
             
             .card {
-                height: auto; /* Allow cards to expand based on content */
+                width: 100%; /* Full width on mobile like reference */
+                height: auto; /* Expand naturally on mobile */
+                flex: 1 1 100%; /* Full width flex item */
                 padding: 20px;
             }
             
@@ -1203,7 +1220,6 @@
                             <p><i class="fas fa-briefcase"></i> <strong>Skills:</strong> ${project.skills}</p>
                             <p><i class="fas fa-clock"></i> <strong>Duration:</strong> ${project.duration}</p>
                             <p><i class="fas fa-building"></i> <strong>Startup:</strong> ${project.startup}</p>
-                            <p>${project.description}</p>
                             <a href="project-details.html?id=${project.id}">View Details <i class="fas fa-arrow-right"></i></a>
                         </div>
                     `;
