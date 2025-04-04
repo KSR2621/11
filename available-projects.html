@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Projects | Taskora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --cyber-purple: #bc13fe;
+            --matrix-green: #00ff41;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --gradient-1: linear-gradient(135deg, var(--neon-blue), var(--cyber-purple));
+            --gradient-2: linear-gradient(45deg, var(--matrix-green), var(--neon-blue));
+        }
+
+        /* Scroll-based fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay classes for staggered animations */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-1);
+            border-radius: 4px;
+        }
+
+        .glow {
+            text-shadow: 0 0 10px var(--neon-blue),
+                         0 0 20px var(--neon-blue),
+                         0 0 30px var(--neon-blue);
+            animation: glitch 1.5s linear infinite alternate;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue); }
+            50% { text-shadow: 0 0 5px var(--cyber-purple), 2px 2px 15px var(--matrix-green); }
+        }
+
+        .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-container {
+            position: relative;
+            padding: 20px 20px 100px 20px;
+            text-align: center;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(11, 11, 25, 0.9) 0%,
+                rgba(11, 11, 25, 0.7) 50%,
+                rgba(11, 11, 25, 0.4) 100%);
+            border-bottom: 2px solid var(--neon-blue);
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(0, 243, 255, 0.3); }
+            50% { border-color: rgba(0, 243, 255, 0.8); }
+        }
+
+        .header-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="%2300f3ff" fill-opacity="0.2" d="M49,-50.7C62.3,-42.2,70.2,-21.1,71.9,1.7C73.6,24.5,69.1,49,55.7,60.3C42.3,71.6,20.1,69.8,-3.1,72.9C-26.3,76,-52.6,84.1,-64.9,76.2C-77.1,68.3,-75.3,44.5,-72.8,23.5C-70.3,2.5,-67.1,-15.7,-58.9,-30.3C-50.7,-44.9,-37.5,-55.9,-22.3,-63.5C-7.1,-71.1,10.1,-75.3,24.1,-71.2C38.1,-67.1,48.9,-54.7,49,-50.7Z" transform="translate(100 100)"/></svg>');
+            animation: hologram 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes hologram {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            margin-top: 60px;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.95);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
+            font-size: 1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--neon-blue);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .hamburger:hover {
+            color: var(--matrix-green);
+        }
+
+        .filters-section {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .filters-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-blue);
+            margin-bottom: 30px;
+            position: relative;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .filters-section h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-1);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        #search-bar {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            font-size: 1rem;
+            border: 2px solid var(--neon-blue);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+
+        #search-bar::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        #search-bar:focus {
+            box-shadow: 0 0 0 3px rgba(0, 243, 255, 0.3);
+            outline: none;
+            border-color: var(--matrix-green);
+        }
+
+        .filter-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .filter-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        .filters select {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            font-size: 1rem;
+            border-radius: 25px;
+            border: 2px solid var(--neon-blue);
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%2300f3ff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            cursor: pointer;
+        }
+
+        .filters select:focus {
+            box-shadow: 0 0 0 3px rgba(0, 243, 255, 0.3);
+            outline: none;
+            border-color: var(--matrix-green);
+        }
+
+        .filters select:not([value=""]) {
+            background-color: rgba(0, 243, 255, 0.1);
+            color: var(--neon-blue);
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%2300f3ff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+        }
+
+        .clear-filters {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: var(--gradient-1);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .clear-filters:hover {
+            background: var(--gradient-2);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .clear-filters:active {
+            transform: translateY(0);
+        }
+
+        .confirmation-message {
+            text-align: center;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: var(--card-bg);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+            border-left: 4px solid var(--neon-blue);
+        }
+
+        .confirmation-message.confirmed {
+            color: var(--matrix-green);
+            border-left-color: var(--matrix-green);
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+        }
+
+        .confirmation-message.unconfirmed {
+            color: #ff4d4d;
+            border-left-color: #ff4d4d;
+            text-shadow: 0 0 5px rgba(255, 77, 77, 0.3);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 60px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .container p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            width: 100%;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            width: 300px;
+            height: 350px;
+            flex: 0 0 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent, 
+                var(--neon-blue),
+                transparent 30%);
+            animation: rotate 4s linear infinite;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+        }
+
+        .card-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            margin: 8px 0;
+            color: var(--text-primary);
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-content p i {
+            color: var(--neon-blue);
+            font-size: 1rem;
+            min-width: 20px;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+        }
+
+        .card-content a {
+            color: var(--neon-blue);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            padding: 8px 0;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+        }
+
+        .card-content a:hover {
+            color: var(--matrix-green);
+            transform: translateX(5px);
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .card-content a::after {
+            content: '→';
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .card-content a:hover::after {
+            opacity: 1;
+            margin-left: 5px;
+        }
+
+        footer {
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.95), rgba(20, 20, 30, 0.95));
+            color: var(--text-primary);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 243, 255, 0.1);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+        }
+
+        footer p {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links a {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 243, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            color: var(--neon-blue);
+            background: rgba(0, 243, 255, 0.2);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            color: var(--dark-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            z-index: 999;
+            border: none;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--gradient-2);
+            transform: translateY(-3px);
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 243, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--neon-blue);
+            animation: spin 1s ease-in-out infinite;
+            margin: 30px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 20px 15px 80px 15px;
+            }
+            
+            .header-content {
+                margin-top: 40px;
+            }
+            
+            .glow {
+                font-size: 2.5rem;
+            }
+            
+            .header-content p {
+                font-size: 1rem;
+            }
+            
+            nav {
+                padding: 0.5rem 1rem;
+                height: 50px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hamburger {
+                display: block;
+                font-size: 1.3rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--card-bg);
+                flex-direction: column;
+                padding: 70px 20px 20px;
+                gap: 20px;
+                transition: right 0.3s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
+            }
+            
+            .filters-section {
+                margin: 30px auto;
+            }
+            
+            .filters-section h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .filters {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .search-wrapper, .filter-wrapper {
+                max-width: 100%;
+            }
+            
+            #search-bar, .filters select {
+                font-size: 0.9rem;
+                padding: 10px 15px 10px 40px;
+            }
+            
+            .clear-filters {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .confirmation-message {
+                font-size: 0.9rem;
+                padding: 12px;
+                margin: 15px 20px;
+            }
+            
+            .container {
+                padding: 40px 15px;
+                gap: 25px;
+            }
+            
+            .card {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+                flex: 1 1 100%;
+            }
+            
+            .card-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .card-content p {
+                font-size: 0.9rem;
+            }
+            
+            footer {
+                padding: 25px 15px;
+                font-size: 0.9rem;
+            }
+
+            .scroll-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 20px 15px 60px 15px;
+            }
+            
+            .glow {
+                font-size: 2rem;
+            }
+            
+            .header-content p {
+                font-size: 0.9rem;
+            }
+            
+            .filters-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            #search-bar, .filters select {
+                font-size: 0.85rem;
+                padding: 8px 10px 8px 35px;
+            }
+            
+            .search-wrapper i, .filter-wrapper i {
+                font-size: 1rem;
+                left: 12px;
+            }
+            
+            .card-content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .card-content p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Taskora</div>
+        <button class="hamburger" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+        <div class="nav-links" id="navLinks">
+            <a href="main.html">Home</a>
+            <a href="available-students.html">Available Talent</a>
+            <a href="community.html">Community Forum</a>
+            
+        </div>
+        <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    </nav>
+
+    <!-- Header with Title and Subtitle -->
+    <div class="header-container fade-in">
+        <div class="header-content">
+            <h1 class="glow">Available Projects</h1>
+            <p class="gradient-text fade-in delay-1">Dive into cutting-edge startup projects and collaborate with innovators to build the future</p>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="filters-section fade-in delay-1">
+        <h2>Find Your Perfect Project</h2>
+        <div class="filters">
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-bar" placeholder="Search projects...">
+            </div>
+            <div class="filter-wrapper">
+                <i class="fas fa-code"></i>
+                <select id="skill-filter">
+                    <option value="">Select Skillset</option>
+                    <option value="web-development">Web Development</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="graphic-design">Graphic Design</option>
+                    <option value="data-analysis">Data Analysis</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="filter-wrapper">
+                <i class="fas fa-clock"></i>
+                <select id="duration-filter">
+                    <option value="">Select Duration</option>
+                    <option value="short-term">Short-term (≤ 2 months)</option>
+                    <option value="long-term">Long-term (> 2 months)</option>
+                </select>
+            </div>
+            <button class="clear-filters" id="clearFilters">Clear Filters</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Status Message -->
+    <div id="confirmationMessage" class="confirmation-message fade-in delay-2"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner"></div>
+
+    <!-- Project Cards Section -->
+    <div class="container" id="projectContainer">
+        <!-- Projects will be dynamically loaded here -->
+    </div>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <footer class="fade-in">
+        <p>© 2025 Taskora. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="mailto:contact@taskora.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK (Modular) -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+        import { getDatabase, ref, onValue, get } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD0wtET8bTtw_133RE4rWZiRFGESfbDtC0",
+            authDomain: "student-startup-connect.firebaseapp.com",
+            databaseURL: "https://student-startup-connect-default-rtdb.firebaseio.com",
+            projectId: "student-startup-connect",
+            storageBucket: "student-startup-connect.firebasestorage.app",
+            messagingSenderId: "570854385529",
+            appId: "1:570854385529:web:e45e5076a0cbcb9a56f1a8",
+            measurementId: "G-T5PMGL8K26"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+        const auth = getAuth(app);
+
+        let isConfirmed = false;
+        let userId = null;
+        let userType = null;
+        let appliedProjects = new Set(); // Track projects the user has applied to
+
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('#navLinks');
+            const mobileOverlay = document.querySelector('#mobileOverlay');
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            const toggleMenu = () => {
+                navLinks.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                
+                // Toggle hamburger icon
+                if (navLinks.classList.contains('active')) {
+                    hamburger.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            };
+
+            hamburger.addEventListener('click', toggleMenu);
+            mobileOverlay.addEventListener('click', toggleMenu);
+
+            // Close menu when any nav link is clicked
+            navLinksItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) { // Only for mobile
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Clear Filters functionality
+            document.getElementById('clearFilters').addEventListener('click', () => {
+                document.getElementById('search-bar').value = '';
+                document.getElementById('skill-filter').value = '';
+                document.getElementById('duration-filter').value = '';
+                renderProjects(allProjects);
+            });
+
+            // Scroll to top button functionality
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Initialize fade-in animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            window.addEventListener('load', fadeInOnScroll);
+            fadeInOnScroll();
+        });
+
+        // Check authentication state and confirmation status
+        onAuthStateChanged(auth, async (user) => {
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            if (user) {
+                // User is logged in
+                userId = localStorage.getItem('userId');
+                userType = localStorage.getItem('userType');
+
+                if (!userId || userId !== user.uid) {
+                    console.error("User ID mismatch:", { localStorageUserId: userId, authUserId: user.uid });
+                    confirmationMessage.textContent = "Authentication error: User ID mismatch. Please log in again.";
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('userType');
+                    return;
+                }
+
+                if (!userType) {
+                    confirmationMessage.textContent = "User type not found. Please sign up again.";
+                    return;
+                }
+
+                // Check confirmation status for students
+                if (userType === 'student') {
+                    const userRef = ref(database, `users/${userId}`);
+                    loadingSpinner.style.display = 'block';
+                    const snapshot = await get(userRef);
+                    loadingSpinner.style.display = 'none';
+                    
+                    if (!snapshot.exists()) {
+                        confirmationMessage.textContent = "User data not found. Please sign up again.";
+                        return;
+                    }
+                    const userData = snapshot.val();
+                    console.log("Fetched user data:", userData); // Debug log
+                    isConfirmed = userData.confirmed === true || userData.confirmed === "true";
+                    console.log("isConfirmed value:", isConfirmed); // Debug log
+
+                    // Update the confirmation message
+                    if (isConfirmed) {
+                        confirmationMessage.classList.add('confirmed');
+                        confirmationMessage.textContent = "You are confirmed and can apply to projects.";
+                    } else {
+                        confirmationMessage.classList.add('unconfirmed');
+                        confirmationMessage.textContent = "You are an unconfirmed user, you cannot apply for projects.";
+                    }
+
+                    // Fetch applications to check which projects the user has already applied to
+                    const applicationsRef = ref(database, 'applications');
+                    loadingSpinner.style.display = 'block';
+                    const applicationsSnapshot = await get(applicationsRef);
+                    loadingSpinner.style.display = 'none';
+                    
+                    if (applicationsSnapshot.exists()) {
+                        const applications = applicationsSnapshot.val();
+                        Object.values(applications).forEach(app => {
+                            if (app.studentId === userId) {
+                                appliedProjects.add(app.projectId);
+                            }
+                        });
+                    }
+                } else {
+                    // Startups or other user types can view projects but cannot apply
+                    isConfirmed = false;
+                    confirmationMessage.textContent = "Only students can apply for projects.";
+                }
+            } else {
+                // User is not logged in
+                confirmationMessage.textContent = "Log in as a student to apply for projects.";
+            }
+
+            // Load projects regardless of login status
+            loadProjects();
+        });
+
+        // Reference to the projects in Firebase
+        const projectsRef = ref(database, 'projects');
+        let allProjects = [];
+
+        // Function to render project cards
+        function renderProjects(projects) {
+            const container = document.getElementById('projectContainer');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            
+            loadingSpinner.style.display = 'none';
+            container.innerHTML = ''; // Clear existing cards
+
+            if (projects.length === 0) {
+                container.innerHTML = '<p>No projects match your search criteria.</p>';
+                return;
+            }
+
+            projects.forEach(project => {
+                // Only display projects that are confirmed and have status "Open"
+                if (project.confirmed === true && project.status === 'Open') {
+                    const hasApplied = appliedProjects.has(project.id);
+                    const card = document.createElement('div');
+                    card.className = 'card fade-in';
+                    card.innerHTML = `
+                        <div class="card-content">
+                            <h3>${project.projectTitle}</h3>
+                            <p><i class="fas fa-briefcase"></i> <strong>Skills:</strong> ${project.skills}</p>
+                            <p><i class="fas fa-clock"></i> <strong>Duration:</strong> ${project.duration}</p>
+                            <p><i class="fas fa-building"></i> <strong>Startup:</strong> ${project.startup}</p>
+                            <p>${project.description}</p>
+                            <a href="project-details.html?id=${project.id}">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+
+            // Initialize fade-in animations for new cards
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Run once immediately to show elements already in view
+            fadeInOnScroll();
+        }
+
+        // Fetch projects from Firebase
+        function loadProjects() {
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'block';
+            
+            onValue(projectsRef, (snapshot) => {
+                allProjects = [];
+                const data = snapshot.val();
+                console.log('Fetched data from Firebase:', data); // Debug log
+
+                if (data) {
+                    Object.keys(data).forEach(key => {
+                        const project = data[key];
+                        project.id = key; // Add the Firebase key as the project ID
+                        allProjects.push(project);
+                    });
+                } else {
+                    console.log('No projects found in Firebase.');
+                }
+
+                renderProjects(allProjects);
+            }, (error) => {
+                console.error('Error fetching projects:', error);
+                loadingSpinner.style.display = 'none';
+                document.getElementById('projectContainer').innerHTML = '<p>Error loading projects. Please try again later.</p>';
+            });
+        }
+
+        // Search Functionality (Updated to include startup and skills)
+        document.getElementById('search-bar').addEventListener('input', (event) => {
+            const query = event.target.value.toLowerCase();
+            const filteredProjects = allProjects.filter(project => {
+                // Ensure fields are strings and handle undefined/null values
+                const projectTitle = project.projectTitle ? project.projectTitle.toLowerCase() : '';
+                const description = project.description ? project.description.toLowerCase() : '';
+                const startup = project.startup ? project.startup.toLowerCase() : '';
+                const skills = project.skills ? project.skills.toLowerCase() : '';
+
+                return (
+                    projectTitle.includes(query) ||
+                    description.includes(query) ||
+                    startup.includes(query) ||
+                    skills.includes(query)
+                );
+            });
+            renderProjects(filteredProjects);
+        });
+
+        // Skill Filter Functionality
+        document.getElementById('skill-filter').addEventListener('change', (event) => {
+            const skill = event.target.value.toLowerCase();
+            const filteredProjects = skill
+                ? allProjects.filter(project => project.skills && project.skills.toLowerCase().includes(skill))
+                : allProjects;
+            renderProjects(filteredProjects);
+        });
+
+        // Duration Filter Functionality
+        document.getElementById('duration-filter').addEventListener('change', (event) => {
+            const duration = event.target.value;
+            const filteredProjects = duration
+                ? allProjects.filter(project => {
+                    const durationMonths = parseInt(project.duration) || 0;
+                    if (duration === 'short-term') {
+                        return durationMonths <= 2;
+                    } else if (duration === 'long-term') {
+                        return durationMonths > 2;
+                    }
+                    return true;
+                })
+                : allProjects;
+            renderProjects(filteredProjects);
+        });
+    </script>
+</body>
+</html>
