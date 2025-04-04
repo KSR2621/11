@@ -212,7 +212,8 @@
             background: var(--gradient-1);
             color: var(--dark-bg);
             padding: 0.5rem 1.5rem;
-            border: 2px solid var(--neon-blue);
+            border: 2px solid
+            var(--neon-blue);
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
@@ -445,8 +446,7 @@
             background: rgba(10, 10, 15, 0.5);
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            overflow-y: auto; /* Allow vertical scrolling */
+            position: static; /* Ensure container stays in normal flow */
         }
 
         .container p {
@@ -463,10 +463,10 @@
             border-radius: 12px;
             padding: 25px;
             transition: all 0.4s ease;
-            min-width: 0; /* Allow cards to shrink below their content width if needed */
-            height: 400px; /* Increased height for better content fit */
-            overflow-y: auto; /* Vertical scrolling within cards */
-            overflow-x: hidden; /* No horizontal scrolling within cards */
+            min-width: 0;
+            height: 400px;
+            overflow-y: auto;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
